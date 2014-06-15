@@ -1,0 +1,24 @@
+name: Graphical_Shop
+author: Staartvin
+website: http://dev.bukkit.org/server-mods/global-time/
+main: me.staartvin.plugins.graphicalshop.GraphicalShop
+version: 1.0.0
+description: Allow players to buy and sell items via a handy graphical interface.
+permissions:
+    graphicalshop.buy:
+        description: Allows a player to buy items
+        default: op
+    graphicalshop.sell:
+        description: Allows a player to sell items
+        default: op
+    graphicalshop.shop:
+        description: Allows a player to open the main shop menu.
+        default: op
+    graphicalshop.reload:
+        description: Allows a player to reload Graphical Shop.
+        default: op    
+commands:
+    graphicalshop:
+      description: Main command of Graphical Shop.
+      usage: /gs <arguments>
+      aliases: [gs]
