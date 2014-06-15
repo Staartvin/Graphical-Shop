@@ -5,6 +5,7 @@
 	<artifactId>GraphicalShop</artifactId>
 	<version>1.0-Dev-${BUILD_NUMBER}</version>
 	<build>
+	    <!-- Test push for Jenkins -->
 
 		<sourceDirectory>src</sourceDirectory>
 
