@@ -16,6 +16,7 @@ import me.staartvin.plugins.graphicalshop.extra.ExtraDataLoader;
 import me.staartvin.plugins.graphicalshop.extra.requirements.Requirement;
 import me.staartvin.plugins.graphicalshop.extra.results.Result;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -102,7 +103,7 @@ public class ShopsConfigHandler {
 		shopsConfig.addDefault("buy.icon 1.amount", 1);
 		shopsConfig.addDefault("buy.icon 1.slot", 0);
 		shopsConfig.addDefault("buy.icon 1.enchantments",
-				Arrays.asList("16;5", "19;2", "21;3"));
+				Arrays.asList("16;4", "19;2", "21;3"));
 		shopsConfig.addDefault("buy.icon 1.display name",
 				"&6Mystical sword of the iron dragon");
 		shopsConfig.addDefault("buy.icon 1.lore", Arrays.asList(
@@ -165,20 +166,30 @@ public class ShopsConfigHandler {
 			item = new ItemStack(itemid, amount, data);
 		else
 			item = new ItemStack(itemid, amount);
+		
+		System.out.print("Meta: " + item.getItemMeta());
+		System.out.print("Other meta: " + Bukkit.getItemFactory().getItemMeta(item.getType()));
 
 		// Add enchantments
 		if (!sEnchantments.isEmpty()) {
 			for (String sEnchantment : sEnchantments) {
 				String[] array = sEnchantment.split(";");
+				
+				System.out.print(sEnchantment);
 
 				Enchantment enchantment = Enchantment.getById(Integer
 						.parseInt(array[0]));
+				
+				System.out.print("Enchantment: " + enchantment);
+				System.out.print("Level: " + Integer.parseInt(array[1]));
 
 				item.addUnsafeEnchantment(enchantment,
 						Integer.parseInt(array[1]));
 			}
 		}
 
+		System.out.print("Other meta 2: " + Bukkit.getItemFactory().getItemMeta(item.getType()));
+		
 		ItemMeta meta = item.getItemMeta();
 
 		// Set display name
