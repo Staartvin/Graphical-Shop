@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
 import me.staartvin.plugins.graphicalshop.GraphicalShop;
 import me.staartvin.plugins.graphicalshop.extra.requirements.Requirement;
 import me.staartvin.plugins.graphicalshop.extra.results.Result;
@@ -239,5 +238,9 @@ public class MenuManager {
 
 	public boolean isValidMenu(String menuType) {
 		return menus.get(menuType) != null;
+	}
+	
+	public List<String> getAllMenuTypes() {
+		return new ArrayList<String>(menus.keySet());
 	}
 }

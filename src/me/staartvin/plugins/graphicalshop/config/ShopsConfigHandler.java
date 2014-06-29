@@ -16,7 +16,6 @@ import me.staartvin.plugins.graphicalshop.extra.ExtraDataLoader;
 import me.staartvin.plugins.graphicalshop.extra.requirements.Requirement;
 import me.staartvin.plugins.graphicalshop.extra.results.Result;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -45,7 +44,6 @@ public class ShopsConfigHandler {
 
 	public void createNewFile() {
 		reloadConfig();
-		saveConfig();
 		loadConfig();
 
 		plugin.getLogger().info("Loaded shops.yml");
@@ -153,8 +151,8 @@ public class ShopsConfigHandler {
 		// Deserialise
 		int itemid = shopsConfig.getInt(prefix + "item id", 0);
 		short data = (short) shopsConfig.getInt(prefix + "data", 0);
-		int amount = shopsConfig.getInt(prefix + "amount");
-
+		int amount = shopsConfig.getInt(prefix + "amount", 1);
+		
 		List<String> sEnchantments = shopsConfig.getStringList(prefix
 				+ "enchantments");
 		String displayName = shopsConfig.getString(prefix + "display name", "");
@@ -166,29 +164,19 @@ public class ShopsConfigHandler {
 			item = new ItemStack(itemid, amount, data);
 		else
 			item = new ItemStack(itemid, amount);
-		
-		System.out.print("Meta: " + item.getItemMeta());
-		System.out.print("Other meta: " + Bukkit.getItemFactory().getItemMeta(item.getType()));
 
 		// Add enchantments
 		if (!sEnchantments.isEmpty()) {
 			for (String sEnchantment : sEnchantments) {
 				String[] array = sEnchantment.split(";");
-				
-				System.out.print(sEnchantment);
 
 				Enchantment enchantment = Enchantment.getById(Integer
 						.parseInt(array[0]));
-				
-				System.out.print("Enchantment: " + enchantment);
-				System.out.print("Level: " + Integer.parseInt(array[1]));
 
 				item.addUnsafeEnchantment(enchantment,
 						Integer.parseInt(array[1]));
 			}
 		}
-
-		System.out.print("Other meta 2: " + Bukkit.getItemFactory().getItemMeta(item.getType()));
 		
 		ItemMeta meta = item.getItemMeta();
 

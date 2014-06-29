@@ -92,10 +92,34 @@ public class CommandsManager implements CommandExecutor {
 
 			sender.sendMessage(ChatColor.GREEN + "Successfully reloaded menus!");
 			return true;
+		} else if (args[0].equalsIgnoreCase("help")) {
+			if (!Util.hasPermission("graphicalshop.help", sender)) return true;
+			
+			if (args.length == 1) {
+				Util.showHelpPages(sender, 1);
+			} else {
+				int page = 1;
+				try {
+					page = Integer.parseInt(args[1]);
+				} catch (final Exception e) {
+					sender.sendMessage(ChatColor.RED
+							+ "Invalid page number!");
+					return true;
+				}
+				Util.showHelpPages(sender, page);
+			}
+			return true;
+		} else if (args[0].equalsIgnoreCase("menus")) {
+			if (!Util.hasPermission("graphicalshop.menus", sender)) return true;
+			
+		
+			String menuString = getAllMenusAsString();
+			
+			sender.sendMessage(ChatColor.GREEN + "Available menus:");
+			sender.sendMessage(ChatColor.BLUE + menuString);
+			
+			return true;
 		}
-		
-		
-		
 		
 		// Check for menus
 		String menuType = args[0].toLowerCase();
@@ -119,5 +143,21 @@ public class CommandsManager implements CommandExecutor {
 		plugin.getMenuManager().getFrontMenu(menuType).open((Player) sender);
 		return true;
 
+	}
+	
+	public String getAllMenusAsString() {
+		StringBuilder builder = new StringBuilder();
+		List<String> menus = plugin.getMenuManager().getAllMenuTypes();
+		
+		for (int i=0;i<menus.size();i++) {
+			if (i == (menus.size() - 1)) {
+				// last entry
+				builder.append(menus.get(i));
+			} else {
+				builder.append(menus.get(i) + ", ");
+			}
+		}
+		
+		return builder.toString();
 	}
 }

@@ -16,6 +16,12 @@ permissions:
         default: op
     graphicalshop.reload:
         description: Allows a player to reload Graphical Shop.
+        default: op
+    graphicalshop.help:
+        description: Allows a player to view the help pages
+        default: op
+    graphicalshop.menus:
+        description: Allows a player to view a list of available menus
         default: op    
 commands:
     graphicalshop:

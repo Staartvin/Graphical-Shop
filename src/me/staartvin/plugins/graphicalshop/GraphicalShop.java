@@ -37,7 +37,6 @@ public class GraphicalShop extends JavaPlugin {
 		
 		// Load shops.yml
 		shopsConfigHandler.createNewFile();
-		shopsConfigHandler.loadConfig();
 
 		// Register command
 		this.getCommand("graphicalshop").setExecutor(new CommandsManager(this));
@@ -45,8 +44,12 @@ public class GraphicalShop extends JavaPlugin {
 		// Load dependencies
 		depManager.loadDependencies();
 
-		// Load menus - it needs the dependencies
-		menuManager.loadMenus();
+		this.getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
+			public void run() {
+				// Load menus - it needs the dependencies
+				menuManager.loadMenus();	
+			}
+		});
 
 		this.getLogger().info(
 				this.getDescription().getFullName() + " has been enabled!");
