@@ -2,7 +2,7 @@ name: Graphical_Shop
 author: Staartvin
 website: http://dev.bukkit.org/bukkit-plugins/graphical-shop/
 main: me.staartvin.plugins.graphicalshop.GraphicalShop
-version: 1.0.0
+version: ${project.version}
 description: Allow players to buy and sell items via a handy graphical interface.
 permissions:
     graphicalshop.buy:
